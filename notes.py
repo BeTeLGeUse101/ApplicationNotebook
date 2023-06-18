@@ -85,7 +85,7 @@ def edit_note():
 def search_notes_by_date():
     date_str = input("Введите дату для поиска заметок (в формате ГГГГ-ММ-ДД): ")
     try:
-        search_date = datetime.strptime(date_str, "%Y-%m-%d")
+        search_date = datetime.strptime(date_str, "%Y-%m-%d").date()
     except ValueError:
         print("Неверный формат даты. Попробуйте снова.")
         return
@@ -102,6 +102,7 @@ def search_notes_by_date():
         if found_notes:
             print(f"Найдено заметок по дате {date_str}: {len(found_notes)}")
             for note in found_notes:
+                ("---------------------")
                 print(f"Идентификатор: {note[0]}")
                 print(f"Заголовок: {note[1]}")
                 print(f"Тело заметки: {note[2]}")
@@ -140,7 +141,7 @@ def generate_id():
 
 def main():
     if not os.path.isfile(NOTES_FILE):
-        with open(NOTES_FILE, "w", encoding="utf-8") as file:
+        with open(NOTES_FILE, "w", encoding="utf-8", newline="") as file:
             pass
     while True:
         display_menu()
